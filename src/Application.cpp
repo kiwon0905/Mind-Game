@@ -9,10 +9,25 @@ m_audioPlayer(m_soundBuffers)
 {
 	m_window.resetGLStates();
 	m_socket.setBlocking(false);
+	m_listener.setBlocking(false);
+
+	std::cout << "getting invited?\n";
+	c;
+	std::cin >> c;
+	if (c == 'y')
+	{
+		m_listener.listen(PORT);
+		getWindow().create(sf::VideoMode(400, 600), "Mind Game - invite me");
+	}
+	else
+		getWindow().create(sf::VideoMode(400, 600), "Mind Game");
+
+
 }
 
 Application::~Application()
 {
+	m_socket.disconnect();
 }
 
 sf::RenderWindow & Application::getWindow()
@@ -23,6 +38,11 @@ sf::RenderWindow & Application::getWindow()
 sf::TcpSocket & Application::getSocket()
 {
 	return m_socket;
+}
+
+sf::TcpListener & Application::getListener()
+{
+	return m_listener;
 }
 
 AudioPlayer & Application::getAudioPlayer()

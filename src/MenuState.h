@@ -1,6 +1,7 @@
 #pragma once
 #include "GameState.h"
 #include "UI.h"
+#include <SFML/System/Clock.hpp>
 
 namespace sf
 {
@@ -26,5 +27,6 @@ private:
 
 
 	UI m_UI;
+
 };
 

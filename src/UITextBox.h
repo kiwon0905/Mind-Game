@@ -12,6 +12,7 @@ public:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void setString(const std::string & s);
 	sf::Text & getText();
+	sf::RectangleShape & getRect();
 private:
 	bool contains(int x, int y) const;
 

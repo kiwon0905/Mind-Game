@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <SFML/Network.hpp>
-
+#include <memory>
 
 #include "ResourceManager.h"
 #include "GameStateStack.h"
@@ -15,7 +15,7 @@ class Application
 {
 public:
 	static const sf::Time TIME_STEP;
-
+	static const unsigned int PORT = 5000;
 
 	Application(const std::string & path);
 	~Application();
@@ -26,6 +26,7 @@ public:
 	void run();
 
 	sf::TcpSocket & getSocket();
+	sf::TcpListener & getListener();
 	sf::RenderWindow & Application::getWindow();
 	AudioPlayer & getAudioPlayer();
 	Textures & getTextures();
@@ -33,11 +34,12 @@ public:
 
 	int getTps();
 	int getFps();
-
+	char c;
 private:
 	GameStateStack m_states;
 	sf::RenderWindow m_window; 
 	sf::TcpSocket m_socket;
+	sf::TcpListener m_listener; 
 	AudioPlayer m_audioPlayer;
 	Textures m_textures;
 	SoundBuffers m_soundBuffers;

@@ -109,6 +109,11 @@ sf::Text & UITextBox::getText()
 	return m_text;
 }
 
+sf::RectangleShape & UITextBox::getRect()
+{
+	return m_background;
+}
+
 bool UITextBox::contains(int x, int y) const
 {
 	return getTransform().transformRect(m_background.getGlobalBounds()).contains(static_cast<float>(x), static_cast<float>(y));

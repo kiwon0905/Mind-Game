@@ -27,5 +27,6 @@
     <ClInclude Include="src\UIWidget.h" />
     <ClInclude Include="src\PlayingState.h" />
     <ClInclude Include="src\MenuState.h" />
+    <ClInclude Include="src\NetProtocol.h" />
   </ItemGroup>
 </Project>

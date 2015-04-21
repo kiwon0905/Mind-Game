@@ -1,6 +1,6 @@
 #include "PlayingState.h"
 #include "Application.h"
-
+#include "NetProtocol.h"
 
 PlayingState::PlayingState()
 {
@@ -33,8 +33,13 @@ void PlayingState::handlePackets(Application & app)
 
 void PlayingState::handlePacket(Application & app, sf::Packet & packet)
 {
-	
-	
+	sf::Int32 t;
+	packet >> t;
+	if (t == Game)
+	{
+		m_game.handlePacket(packet);
+	}
+
 }
 
 void PlayingState::handleEvent(Application & app)
@@ -45,18 +50,19 @@ void PlayingState::handleEvent(Application & app)
 	{
 		if (ev.type == sf::Event::Closed)
 			app.quit();
+		m_game.handleEvent(ev);
 	}
-		handlePackets(app);
+	handlePackets(app);
 }
 void PlayingState::update(Application & app)
 {
-	
+	m_game.update(app.TIME_STEP.asSeconds());
 }
 void PlayingState::draw(Application & app)
 {
 	sf::RenderWindow & window = app.getWindow();
 	window.clear();
-
+	m_game.draw(window);
 	window.display();
 }
 void PlayingState::onExit(Application & app)

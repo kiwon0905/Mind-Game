@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameState.h"
+#include "Game.h"
 
 #include <string>
 
@@ -27,5 +28,7 @@ public:
 private:
 	void handlePackets(Application & app);
 	void handlePacket(Application & app, sf::Packet & packet);
+
+	class Game m_game;
 };
 

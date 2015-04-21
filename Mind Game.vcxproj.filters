@@ -12,6 +12,7 @@
     <ClCompile Include="src\UIWidget.cpp" />
     <ClCompile Include="src\PlayingState.cpp" />
     <ClCompile Include="src\MenuState.cpp" />
+    <ClCompile Include="src\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
@@ -28,5 +29,6 @@
     <ClInclude Include="src\PlayingState.h" />
     <ClInclude Include="src\MenuState.h" />
     <ClInclude Include="src\NetProtocol.h" />
+    <ClInclude Include="src\Game.h" />
   </ItemGroup>
 </Project>

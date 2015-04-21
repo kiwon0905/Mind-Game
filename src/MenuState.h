@@ -26,7 +26,7 @@ private:
 	void handlePacket(Application & app, sf::Packet & packet);
 
 
-	UI m_UI;
+	UI m_ui;
 
 };
 

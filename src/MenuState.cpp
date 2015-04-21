@@ -17,7 +17,7 @@ MenuState::~MenuState()
 void MenuState::onEnter(Application & app)
 {
 	sf::Font & consolas = *app.getFonts().get("C:/Windows/Fonts/consola.ttf");
-	m_UI.setFont(consolas);
+	m_ui.setFont(consolas);
 
 
 	char szHostName[255];
@@ -27,55 +27,55 @@ void MenuState::onEnter(Application & app)
 	std::string ip = ::inet_ntoa(*(struct in_addr *)*host_entry->h_addr_list);
 	UILabel::Ptr ipLabel = UILabel::create(ip);
 	ipLabel->setPosition(80, 50);
-	m_UI.add("ipLabel", ipLabel);
+	m_ui.add("ipLabel", ipLabel);
 
 	UITextBox::Ptr inviteTextBox = UITextBox::create(110, 20);
 	inviteTextBox->setPosition(80, 200);
 	inviteTextBox->setString("localhost");
 	inviteTextBox->getRect().setOutlineColor(sf::Color::Blue);
 	inviteTextBox->getRect().setOutlineThickness(2);
-	m_UI.add("inviteTextBox", inviteTextBox);
+	m_ui.add("inviteTextBox", inviteTextBox);
 
 	UIButton::Ptr inviteButton = UIButton::create("Invite", 20, sf::Color::White);
 	inviteButton->setPosition(200, 200);
 	auto onInvitePress = [this]()
 	{
-		m_UI.get<UIButton>("inviteButton")->getText().setColor(sf::Color::Yellow);
+		m_ui.get<UIButton>("inviteButton")->getText().setColor(sf::Color::Yellow);
 	};
 	auto onInviteClick = [this, &app]()
 	{
-		m_UI.get<UIButton>("inviteButton")->getText().setColor(sf::Color::White);
+		m_ui.get<UIButton>("inviteButton")->getText().setColor(sf::Color::White);
 
-		sf::String ip = m_UI.get<UITextBox>("inviteTextBox")->getText().getString();
+		sf::String ip = m_ui.get<UITextBox>("inviteTextBox")->getText().getString();
 
 		//if (app.getSocket().getRemotePort == 0)
 			app.getSocket().connect(ip.toAnsiString(), app.PORT);
 	};
 	auto onInviteRelease = [this]()
 	{
-		m_UI.get<UIButton>("inviteButton")->getText().setColor(sf::Color::White);
+		m_ui.get<UIButton>("inviteButton")->getText().setColor(sf::Color::White);
 	};
 	inviteButton->setCallback(UIButton::Press, onInvitePress);
 	inviteButton->setCallback(UIButton::Click, onInviteClick);
 	inviteButton->setCallback(UIButton::Release, onInviteRelease);
-	m_UI.add("inviteButton", inviteButton);
+	m_ui.add("inviteButton", inviteButton);
 
 
 	UITextBox::Ptr joinTextBox = UITextBox::create(110, 20);
 	joinTextBox->setPosition(80, 250);
 	joinTextBox->getRect().setOutlineColor(sf::Color::Blue);
 	joinTextBox->getRect().setOutlineThickness(2);
-	m_UI.add("joinTextBox", joinTextBox);
+	m_ui.add("joinTextBox", joinTextBox);
 
 	UIButton::Ptr joinAcceptButton = UIButton::create("Accept", 20, sf::Color::White);
 	joinAcceptButton->setPosition(200, 250);
 	auto onJoinAcceptPress = [this]()
 	{
-		m_UI.get<UIButton>("joinAcceptButton")->getText().setColor(sf::Color::Yellow);
+		m_ui.get<UIButton>("joinAcceptButton")->getText().setColor(sf::Color::Yellow);
 	};
 	auto onJoinAcceptClick = [this, &app]()
 	{
-		m_UI.get<UIButton>("joinAcceptButton")->getText().setColor(sf::Color::White);
+		m_ui.get<UIButton>("joinAcceptButton")->getText().setColor(sf::Color::White);
 
 		if (app.getSocket().getRemotePort() != 0)
 		{
@@ -88,24 +88,24 @@ void MenuState::onEnter(Application & app)
 	};
 	auto onJoinAcceptRelease = [this]()
 	{
-		m_UI.get<UIButton>("joinAcceptButton")->getText().setColor(sf::Color::White);
+		m_ui.get<UIButton>("joinAcceptButton")->getText().setColor(sf::Color::White);
 	};
 	joinAcceptButton->setCallback(UIButton::Press, onJoinAcceptPress);
 	joinAcceptButton->setCallback(UIButton::Click, onJoinAcceptClick);
 	joinAcceptButton->setCallback(UIButton::Release, onJoinAcceptRelease);
-	m_UI.add("joinAcceptButton", joinAcceptButton);
+	m_ui.add("joinAcceptButton", joinAcceptButton);
 
 
 	UIButton::Ptr joinDeclineButton = UIButton::create("Decline", 20, sf::Color::White);
 	joinDeclineButton->setPosition(260, 250);
 	auto onJoinDeclinePress = [this]()
 	{
-		m_UI.get<UIButton>("joinDeclineButton")->getText().setColor(sf::Color::Yellow);
+		m_ui.get<UIButton>("joinDeclineButton")->getText().setColor(sf::Color::Yellow);
 	};
 	auto onJoinDeclineClick = [this, &app]()
 	{
-		m_UI.get<UIButton>("joinDeclineButton")->getText().setColor(sf::Color::White);
-		m_UI.get<UITextBox>("joinTextBox")->setString("");
+		m_ui.get<UIButton>("joinDeclineButton")->getText().setColor(sf::Color::White);
+		m_ui.get<UITextBox>("joinTextBox")->setString("");
 		if (app.getSocket().getRemotePort() != 0)
 		{
 			sf::Packet packet;
@@ -117,12 +117,12 @@ void MenuState::onEnter(Application & app)
 	};
 	auto onJoinDeclineRelease = [this]()
 	{
-		m_UI.get<UIButton>("joinDeclineButton")->getText().setColor(sf::Color::White);
+		m_ui.get<UIButton>("joinDeclineButton")->getText().setColor(sf::Color::White);
 	};
 	joinDeclineButton->setCallback(UIButton::Press, onJoinDeclinePress);
 	joinDeclineButton->setCallback(UIButton::Click, onJoinDeclineClick);
 	joinDeclineButton->setCallback(UIButton::Release, onJoinDeclineRelease);
-	m_UI.add("joinDeclineButton", joinDeclineButton);
+	m_ui.add("joinDeclineButton", joinDeclineButton);
 
 
 
@@ -132,7 +132,7 @@ void MenuState::onEnter(Application & app)
 	exitButton->setPosition(200, 300);
 	auto onExitPress = [this]()
 	{
-		m_UI.get<UIButton>("exitButton")->getText().setColor(sf::Color::Blue);
+		m_ui.get<UIButton>("exitButton")->getText().setColor(sf::Color::Blue);
 	};
 	auto onExitClick = [&app]()
 	{
@@ -140,12 +140,12 @@ void MenuState::onEnter(Application & app)
 	};
 	auto onExitRelease = [this]()
 	{
-		m_UI.get<UIButton>("exitButton")->getText().setColor(sf::Color::White);
+		m_ui.get<UIButton>("exitButton")->getText().setColor(sf::Color::White);
 	};
 	exitButton->setCallback(UIButton::Press, onExitPress);
 	exitButton->setCallback(UIButton::Click, onExitClick);
 	exitButton->setCallback(UIButton::Release, onExitRelease);
-	m_UI.add("exitButton", exitButton);
+	m_ui.add("exitButton", exitButton);
 
 
 	
@@ -159,7 +159,7 @@ void MenuState::handleEvent(Application & app)
 	{
 		if (ev.type == sf::Event::Closed)
 			app.quit();
-		m_UI.handleEvent(ev);
+		m_ui.handleEvent(ev);
 
 	}
 	if (app.getSocket().getRemotePort() != 0)
@@ -168,7 +168,7 @@ void MenuState::handleEvent(Application & app)
 }
 void MenuState::update(Application & app)
 {
-	m_UI.update(app.TIME_STEP.asSeconds());
+	m_ui.update(app.TIME_STEP.asSeconds());
 
 	sf::TcpSocket & opponent = app.getSocket();
 
@@ -180,7 +180,7 @@ void MenuState::update(Application & app)
 	{
 		std::cout <<"remote ip: "<< app.getSocket().getRemoteAddress() << "port: " << app.getSocket().getRemotePort() << "\n";
 
-		m_UI.get<UITextBox>("joinTextBox")->setString(app.getSocket().getRemoteAddress().toString());
+		m_ui.get<UITextBox>("joinTextBox")->setString(app.getSocket().getRemoteAddress().toString());
 
 	}
 
@@ -190,7 +190,7 @@ void MenuState::draw(Application & app)
 {
 	sf::RenderWindow & window = app.getWindow();
 	window.clear();
-	window.draw(m_UI);
+	window.draw(m_ui);
 	window.display();
 }
 void MenuState::onExit(Application & app)

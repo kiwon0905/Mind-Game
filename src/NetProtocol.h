@@ -4,5 +4,6 @@
 enum : sf::Int32
 {
 	Accept,
-	Decline
+	Decline,
+	Game
 };

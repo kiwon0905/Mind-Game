@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\AudioPlayer.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameStateStack.cpp" />
     <ClCompile Include="src\MenuState.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -93,6 +94,7 @@
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\AudioPlayer.h" />
+    <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameState.h" />
     <ClInclude Include="src\GameStateStack.h" />
     <ClInclude Include="src\MenuState.h" />

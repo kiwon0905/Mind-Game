@@ -13,9 +13,9 @@ PlayingState::~PlayingState()
 
 void PlayingState::onEnter(Application & app)
 {
-	
+	m_game.init(app);
 }
-
+#include <iostream>
 void PlayingState::handlePackets(Application & app)
 {
 	sf::TcpSocket & socket = app.getSocket();
@@ -33,7 +33,7 @@ void PlayingState::handlePackets(Application & app)
 
 void PlayingState::handlePacket(Application & app, sf::Packet & packet)
 {
-	sf::Int32 t;
+	Packet t;
 	packet >> t;
 	if (t == Game)
 	{

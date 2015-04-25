@@ -30,6 +30,8 @@ private:
 	std::vector<sf::Int32> m_enemy;
 	sf::Int32 m_currentRound;
 	sf::Int32 m_remainingPoints;
+
+
 	UI m_ui;
 };
 

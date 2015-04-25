@@ -13,6 +13,6 @@ int main(int argc, char ** argv)
 	Application app(params[0]);
 	app.push(new MenuState);
 	app.run();
-	std::cin.get();
+
 	//std::cin.get();
 }

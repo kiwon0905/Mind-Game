@@ -11,6 +11,10 @@ m_audioPlayer(m_soundBuffers)
 	m_socket.setBlocking(false);
 	m_listener.setBlocking(false);
 
+	m_listener.listen(PORT);
+	getWindow().create(sf::VideoMode(400, 600), "Mind Game");
+	
+	/*//////////////////////////////////////////////////////////////////////////////////////////////////////
 	std::cout << "getting invited?\n";
 	c;
 	std::cin >> c;
@@ -21,7 +25,7 @@ m_audioPlayer(m_soundBuffers)
 	}
 	else
 		getWindow().create(sf::VideoMode(400, 600), "Mind Game");
-
+	/*//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
 

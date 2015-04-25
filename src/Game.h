@@ -23,10 +23,13 @@ public:
 private:
 	void setValue(bool me, sf::Int32 round, sf::Int32 value);
 
+	sf::Texture * m_checkMark;
+	sf::Texture * m_xMark;
+	std::vector<sf::Sprite> m_checks;
 	std::vector<sf::Int32> m_me;
 	std::vector<sf::Int32> m_enemy;
 	sf::Int32 m_currentRound;
-
+	sf::Int32 m_remainingPoints;
 	UI m_ui;
 };
 

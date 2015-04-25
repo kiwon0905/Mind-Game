@@ -8,6 +8,7 @@ Game::Game():
 m_currentRound(1),
 m_remainingPoints(100)
 {
+	
 }
 
 Game::~Game()
@@ -119,6 +120,12 @@ void Game::init(Application & app)
 	m_checkMark = app.getTextures().get("Check.png").get();
 	m_xMark = app.getTextures().get("X.png").get();
 	m_checks.resize(10);
+
+	UILabel::Ptr endLabel = UILabel::create("");
+	endLabel->setPosition(100, 200);
+	endLabel->getText().setCharacterSize(100);
+	endLabel->getText().setStyle(sf::Text::Bold);
+	m_ui.add("endLabel", endLabel);
 }
 
 void Game::handleEvent(sf::Event & ev)
@@ -137,12 +144,53 @@ void Game::handlePacket(sf::Packet & packet)
 void Game::update(float dt)
 {
 	m_ui.update(dt);
+
+
+	//if the game is over
+	if (m_enemy[9] != -1 && m_me[9] != -1)
+	{
+		int roundsWon = 0;
+		int enemyRoundsWon = 0;
+		int enemyRemainingPoint = 100;
+		for (std::size_t i = 0; i < 10; ++i)
+		{
+			enemyRemainingPoint -= m_enemy[i];
+			if (m_me[i] > m_enemy[i])
+				++roundsWon;
+			else if (m_enemy[i] > m_me[i])
+				++enemyRoundsWon;
+		}
+
+		std::string end;
+
+		if (roundsWon > enemyRoundsWon)
+			end = "WIN";
+		else if (roundsWon < enemyRoundsWon)
+			end = "LOSE";
+		else if (roundsWon == enemyRoundsWon)
+		{
+			if (m_remainingPoints > enemyRemainingPoint)
+				end = "WIN";
+			else if (m_remainingPoints < enemyRemainingPoint)
+				end = "LOSE";
+			else
+				end = "TIE";
+		}
+		m_ui.get<UILabel>("endLabel")->getText().setString(end);
+		if (end == "WIN")
+			m_ui.get<UILabel>("endLabel")->getText().setColor(sf::Color::Blue);
+		else if (end == "LOSE")
+			m_ui.get<UILabel>("endLabel")->getText().setColor(sf::Color::Red);
+		else
+			m_ui.get<UILabel>("endLabel")->getText().setColor(sf::Color::Yellow);
+	}
 }
 void Game::draw(sf::RenderWindow & window)
 {
 	window.draw(m_ui);
 	for (auto & s : m_checks)
 		window.draw(s);
+	
 }
 
 void Game::setValue(bool me, sf::Int32 round, sf::Int32 value)
@@ -185,9 +233,9 @@ void Game::setValue(bool me, sf::Int32 round, sf::Int32 value)
 		std::string s = m_ui.get<UILabel>("olabel" + std::to_string(round))->getText().getString();
 
 		if (round == 10)
-			s.insert(3, std::to_string(value));
+			s[3] = '?';
 		else
-			s.insert(2, std::to_string(value));
+			s[2] = '?';
 		s.resize(6);
 		UILabel::Ptr label = m_ui.get<UILabel>("olabel" + std::to_string(round));
 		label->getText().setString(s);
